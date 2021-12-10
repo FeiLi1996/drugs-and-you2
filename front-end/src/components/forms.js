@@ -5,7 +5,7 @@ export function DrugForm (prop){
 
     return(
 
-        <form onSubmit={(e)=>prop.addDrugProfile(e)} autoComplete ='off'>
+        <form onSubmit={(e)=>prop.handleDrugFormSubmission(e)} autoComplete ='off'>
         <div>
             <div>
                 <label>Drug Name: </label>

@@ -4,7 +4,7 @@ import { DrugForm } from './forms'
 
 const ProfileDrug = () => {
     const {drugProfile,setDrugProfile} = useContext(GlobalContext)
-    const [searchResult,setSearchResult] = useState('')
+    const [searchResult,setSearchResult] = useState('Search a drug')
 
     //const {diseaseProfile,setDiseaseProfile} = useContext(GlobalContext)
    //api calls
@@ -14,12 +14,18 @@ const ProfileDrug = () => {
         tempCopy.splice(idx,1)
         setDrugProfile(tempCopy)
    }
-   function addDrugProfile (event){
-    event.preventDefault()
-    let tempCopy;
-    let newDrug = event.target.drug_name.value
-    tempCopy = JSON.parse(JSON.stringify(drugProfile));
-    setDrugProfile([...tempCopy,newDrug])     
+   function addDrugProfile (newDrug){
+
+    // let tempCopy;
+
+    // tempCopy = JSON.parse(JSON.stringify(drugProfile));
+    setDrugProfile([...drugProfile,newDrug])
+    setSearchResult('Search a drug')
+   }
+   function handleDrugFormSubmission(event){
+       event.preventDefault()
+       setSearchResult(event.target.drug_name.value)   
+
    }
     
     return(
@@ -39,10 +45,24 @@ const ProfileDrug = () => {
                                 
                 </ul>   
             </div>
+          
             {drugProfile}
             
-            <DrugForm addDrugProfile={addDrugProfile}/>
+            <DrugForm handleDrugFormSubmission={handleDrugFormSubmission}/>
             {/* <div onClick = {()=>setDrugProfile([...drugProfile,'asp'])}>click me</div> */}
+
+            {(searchResult) && !searchResult.includes("Check") && !searchResult.includes("Search") ?
+                (<ul>
+                    <li>{searchResult} <span onClick = {()=>addDrugProfile(searchResult)}>+</span></li>
+                </ul>
+                )
+            :
+            (
+                (<ul>
+                    <li>{searchResult} </li>
+                </ul>
+                )
+            )}
         </div>
     )
 
