@@ -9,7 +9,7 @@ import Introduction from '../components/intro'
 
 
 const HomePage = () => {
-    const [drugProfile,setDrugProfile] = useState(['ibuprofen']);
+    const [drugProfile,setDrugProfile] = useState(['ibuprofen','sushi']);
     const [diseaseProfile,setDiseaseProfile] = useState(['Asthma']);
     const [drugDiseaseInteractionInfo,setDrugDiseaseInteractionInfo] = useState([]);
   
