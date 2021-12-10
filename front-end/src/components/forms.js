@@ -22,3 +22,26 @@ export function DrugForm (prop){
     )
 }
 
+
+
+export function DiseaseForm (prop){
+
+    return(
+
+        <form onSubmit={(e)=>prop.handleDiseaseFormSubmission(e)} autoComplete ='off'>
+        <div>
+            <div>
+                <label>Disease Name: </label>
+                <input
+                    type="text"
+                    name='disease_name'
+                    placeholder="Disease Name"
+                />
+           
+            </div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    )
+}
+
