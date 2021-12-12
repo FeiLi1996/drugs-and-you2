@@ -7,7 +7,7 @@ const puppeteer = require('puppeteer');
 
     router.post('/interaction',(req,res)=>{
         console.log(req.body)
-        
+        let overallInteractionDescription =[];
 
         const gettingInteractionDescription = async (name) =>{
             
@@ -21,65 +21,93 @@ const puppeteer = require('puppeteer');
         
             const data = await page.evaluate(()=>{
 
-                let drugAndDiseasesNodeList1
-                let drugAndDiseasesNodeList2
+             
+
                 let drugAndDiseasesArrayList
-                let drugAndDiseasesSeverityClassArrayList
-                let interactionDescriptionNodeList
+          
                 let interactionDescriptionArrayList
-                let interactionDescriptionSeverityArrayList
-                try{
-                    interactionDescriptionNodeList = [...document.querySelectorAll('.interactions-reference')]
-                    interactionDescriptionArrayList = interactionDescriptionNodeList.map(oneInteraction =>
-                        oneInteraction.getElementsByTagName('p')[1].innerHTML
+                let interactionSeverityArrayList
+                
+                
+                // try{
+                //     interactionDescriptionNodeList = [...document.querySelectorAll('.interactions-reference')]
+                //     interactionDescriptionArrayList = interactionDescriptionNodeList.map(oneInteraction =>
+                //         oneInteraction.getElementsByTagName('p')[1].innerHTML
+                //     )
+                //     interactionDescriptionSeverityArrayList = interactionDescriptionNodeList.map(oneInteraction =>
+                //         oneInteraction.getElementsByTagName('p')[0].innerHTML
+                //     )
+
+
+                //     drugAndDiseasesNodeList1 = document.querySelector("ul.interactions")
+                //     drugAndDiseasesNodeList2 = [...drugAndDiseasesNodeList1.querySelectorAll('li')]
+                //     drugAndDiseasesArrayList = drugAndDiseasesNodeList2.map(oneInteraction =>
+                //         oneInteraction.innerText
+                //     )
+                // }
+                
+                // catch(err){
+                //     overallInteractionDescription = "Something went wrong. Try again"
+                // }
+
+                try {
+                    drugAndDiseasesArrayList = [...document.querySelectorAll('.interactions-reference')]
+                    interactionSeverityArrayList = drugAndDiseasesArrayList.map(eachInteraction =>
+                        eachInteraction.querySelector('div').querySelector('span').innerText    
                     )
-                    interactionDescriptionSeverityArrayList = interactionDescriptionNodeList.map(oneInteraction =>
-                        oneInteraction.getElementsByTagName('p')[0].innerHTML
+                    interactionDescriptionArrayList = drugAndDiseasesArrayList.map(eachInteraction =>
+                        eachInteraction.getElementsByTagName('p')[1].innerText   
                     )
-                }
-                catch(err){
-                    interactionDescriptionArrayList = "Check your spelling"
+                        
+                    
+                                //oneInteraction.querySelector('div').querySelector('span').innerText
+                                
+
+                            
+                } catch (error) {
+                    //overallInteractionDescription = "An error has occurred please try again"
                 }
                 
-                try{
-                    drugAndDiseasesNodeList1 = document.querySelector("ul.interactions")
-                    drugAndDiseasesNodeList2 = [...drugAndDiseasesNodeList1.querySelectorAll('li')]
-                    drugAndDiseasesArrayList = drugAndDiseasesNodeList2.map(oneInteraction =>
-                        oneInteraction.innerText
-                    )
-                    drugAndDiseasesSeverityClassArrayList = drugAndDiseasesNodeList2.map(oneInteraction =>
-                        oneInteraction.getAttribute("class")
-                    )
-                }
-                catch(err){
-                    drugAndDiseasesArrayList = "Check your spelling"
-                }
+    
+                
+                
 
-
-
-
-
-
-               
+             
                 return{
-                    drugAndDiseasesArrayList,
-                    drugAndDiseasesSeverityClassArrayList,
-                    interactionDescriptionArrayList,
-                    interactionDescriptionSeverityArrayList
+                    interactionSeverityArrayList,
+                    interactionDescriptionArrayList
+                   
                 }
             })
             await browser.close()
+            
+            console.log(data);
+           
+
+
+
             return   {
                 data
             }
         }
         const interactionDescriptionData =   gettingInteractionDescription (req.body.drugName)
         //console.log(drugNameTest)
-        interactionDescriptionData.then(result =>
+        interactionDescriptionData.then(result =>{
             //console.log(result.data)
-            res.json(result.data)
+            for(let i =0;i<result.data.interactionSeverityArrayList.length;i++ ){
+                    overallInteractionDescription.push({
+                        'drugName': req.body.drugName,
+                        'severity':result.data.interactionSeverityArrayList[i],
+                        'description':result.data.interactionDescriptionArrayList[i]
+                    })
+                }
 
-        )
+            //res.json(result.data)
+      
+            res.json(overallInteractionDescription)
+        })
+        
+        
       
     })
 
