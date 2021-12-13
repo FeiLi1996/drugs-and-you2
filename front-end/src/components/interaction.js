@@ -22,9 +22,10 @@ const Interactions = () => {
         // },
    
         ]);
-
+    
     async function handleDrugDiseaseAnalysis (){
         console.log(drugProfile)
+        console.log(diseaseProfile)
         
         var promiseArray=drugProfile.map(eachDrug =>{
             return httpClient.post("http://localhost:5000/interaction", {
@@ -38,18 +39,26 @@ const Interactions = () => {
         )
         
         
+        
     }
-    let displayedDescriptionAndSeverity = interactionsInfo.map(eachDrug =>{
+        let displayedDescriptionAndSeverity = interactionsInfo.map(eachDrug =>{
+                for(let disease of diseaseProfile){
+                    if(disease.includes(',')){
+                        disease =disease.split(',')[0]
+                        console.log(disease)
+                    }
+                    if(eachDrug.description.includes(disease.toLowerCase()))
+                    return(
 
-            return(
-
-                <ul>
-                    <span>{eachDrug.drugName}</span><span>{eachDrug.diseaseName}</span><span>Severity:{eachDrug.severity}</span>
-                    <li>Description:{eachDrug.description}</li>
-                 </ul>
-            )
-    })
+                        <ul>
+                            <span>{eachDrug.drugName}</span><span>{disease}</span><span>Severity:{eachDrug.severity}</span>
+                            <li>Description:{eachDrug.description}</li>
+                        </ul>
+                    )
+                }
+        })
     console.log(interactionsInfo,'test2')
+    console.log(displayedDescriptionAndSeverity)
         
     return(
 
