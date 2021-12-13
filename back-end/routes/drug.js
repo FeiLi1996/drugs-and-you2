@@ -16,7 +16,7 @@ const puppeteer = require('puppeteer');
             let page = await browser.newPage()
             
         
-            await page.goto(drugUrl , {waitUntil:'networkidle2'})
+            await page.goto(drugUrl , {waitUntil: 'load', timeout: 0})
         
             const data = await page.evaluate(()=>{
                 let drugName

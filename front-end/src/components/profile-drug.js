@@ -1,6 +1,10 @@
 import React, { useContext,useState } from 'react'
+
+
+
 import { GlobalContext } from '../GlobalContext'
 import { DrugForm } from './forms'
+import httpClient from '../helper/httpClient'
 
 const ProfileDrug = () => {
     const {drugProfile,setDrugProfile} = useContext(GlobalContext)
@@ -24,7 +28,17 @@ const ProfileDrug = () => {
    }
    function handleDrugFormSubmission(event){
        event.preventDefault()
-       setSearchResult(event.target.drug_name.value)   
+
+
+       httpClient.post("http://localhost:5000/drugName", {
+        "drugName":event.target.drug_name.value
+    }).then(response=>{
+
+        //console.log(response.data.drugName)
+       setSearchResult(response.data.drugName)   
+    }).catch(error=>{
+        console.log(error)
+    })
 
    }
     

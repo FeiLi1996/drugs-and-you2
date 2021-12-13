@@ -1,7 +1,7 @@
 const express = require ('express');
 const bodyParser = require('body-parser')
 const server = express();
-
+const cors = require('cors')
 
 const drugRoute = require('./routes/drug');
 const diseaseRoute = require('./routes/disease');
@@ -14,7 +14,7 @@ const port = 5000;
 
 
 
-
+server.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 server.use(bodyParser.json());
 
 server.use('/',drugRoute)
