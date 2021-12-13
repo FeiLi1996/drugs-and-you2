@@ -50,7 +50,7 @@ const ProfileDisease = () => {
             }
             else{
                 if( diseaseNameSingleCondition &&  diseaseNameMultipleArrayListCondition){
-                    setSearchResult (["Check your spelling"])
+                    setSearchResult ("Check your spelling")
                 }
 
             }
@@ -61,8 +61,9 @@ const ProfileDisease = () => {
             console.log(error)
         })
        //setSearchResult([event.target.disease_name.value])   
-
+      
    }
+
    console.log('hello')
     return(
 
@@ -84,7 +85,7 @@ const ProfileDisease = () => {
                 </ul>   
             </div>
             <DiseaseForm handleDiseaseFormSubmission ={handleDiseaseFormSubmission}/>
-            {(searchResult) && !searchResult.includes("Check") ?
+            {(searchResult) && (!searchResult.includes("Check")) ?
                 (<ul className="disease_search_list">
                     {searchResult.map((disease,idx)=>
                         <li   className="search_disease" key={idx}> 
