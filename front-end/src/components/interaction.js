@@ -1,6 +1,8 @@
 import React, { useState,useContext } from 'react'
 import { GlobalContext } from '../GlobalContext'
 
+import httpClient from '../helper/httpClient'
+
 
 const Interactions = () => {
     const {diseaseProfile,drugProfile} = useContext(GlobalContext)
@@ -12,17 +14,33 @@ const Interactions = () => {
             description:'blah',
             severity:'mod'
         },
-        {   
-            drugName:'aspirin',
-            diseaseName:'Fluid Retention',
-            description:'blah',
-            severity:'med'
-        },
+        // {   
+        //     drugName:'aspirin',
+        //     diseaseName:'Fluid Retention',
+        //     description:'blah',
+        //     severity:'med'
+        // },
    
         ]);
-    
-    let displayedDescriptionAndSeverity = interactionsInfo.map(eachDrug =>{
+
+    async function handleDrugDiseaseAnalysis (){
+        console.log(drugProfile)
         
+        var promiseArray=drugProfile.map(eachDrug =>{
+            return httpClient.post("http://localhost:5000/interaction", {
+                "drugName":eachDrug
+                })})
+        var ArrayOfResults = await Promise.all(promiseArray);
+        console.log(ArrayOfResults);
+        ArrayOfResults.map(result=>
+               
+            setInteractionsInfo(interactionsInfo=>[...interactionsInfo,...result.data])
+        )
+        
+        
+    }
+    let displayedDescriptionAndSeverity = interactionsInfo.map(eachDrug =>{
+
             return(
 
                 <ul>
@@ -31,7 +49,7 @@ const Interactions = () => {
                  </ul>
             )
     })
-    
+    console.log(interactionsInfo,'test2')
         
     return(
 
@@ -40,7 +58,7 @@ const Interactions = () => {
 
             <h1>Interactions</h1>
             
-            <button>Check Interactions</button>
+            <button onClick={handleDrugDiseaseAnalysis}>Check Interactions</button>
             <button> Clear Interactions</button>
 
 

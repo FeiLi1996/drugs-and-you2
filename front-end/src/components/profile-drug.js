@@ -32,13 +32,13 @@ const ProfileDrug = () => {
 
        httpClient.post("http://localhost:5000/drugName", {
         "drugName":event.target.drug_name.value
-    }).then(response=>{
+        }).then(response=>{
 
-        //console.log(response.data.drugName)
-       setSearchResult(response.data.drugName)   
-    }).catch(error=>{
-        console.log(error)
-    })
+            //console.log(response.data.drugName)
+        setSearchResult(response.data.drugName)   
+        }).catch(error=>{
+            console.log(error)
+        })
 
    }
     
