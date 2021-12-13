@@ -3,6 +3,7 @@ import React,{useState,useContext} from 'react'
 
 import { GlobalContext } from '../GlobalContext'
 import { DiseaseForm } from './forms'
+import httpClient from '../helper/httpClient'
 
 const ProfileDisease = () => {
     const {diseaseProfile,setDiseaseProfile} = useContext(GlobalContext)
@@ -26,7 +27,40 @@ const ProfileDisease = () => {
    }
    function handleDiseaseFormSubmission(event){
        event.preventDefault()
-       setSearchResult([event.target.disease_name.value])   
+       console.log(event.target.disease_name.value)
+
+       httpClient.post("http://localhost:5000/diseaseName", {
+        "diseaseName":event.target.disease_name.value
+        }).then(response=>{
+  
+
+            let diseaseNameSingle=response.data.diseaseNameSingle
+            let diseaseNameMultipleArrayList=response.data.diseaseNameMultipleArrayList
+            
+            let diseaseNameSingleCondition=diseaseNameSingle.includes('Check')
+            let diseaseNameMultipleArrayListCondition=diseaseNameMultipleArrayList.includes('Check')
+            console.log(diseaseNameSingleCondition,'single')
+            console.log(diseaseNameMultipleArrayListCondition,'multiple')
+            console.log(response.data)
+            if( !diseaseNameSingleCondition  && diseaseNameMultipleArrayListCondition){
+                setSearchResult ([diseaseNameSingle])
+            }
+            else if(diseaseNameSingleCondition && !diseaseNameMultipleArrayListCondition){
+                setSearchResult (diseaseNameMultipleArrayList)
+            }
+            else{
+                if( diseaseNameSingleCondition &&  diseaseNameMultipleArrayListCondition){
+                    setSearchResult (["Check your spelling"])
+                }
+
+            }
+            
+
+        //setSearchResult(response.data.drugName)   
+        }).catch(error=>{
+            console.log(error)
+        })
+       //setSearchResult([event.target.disease_name.value])   
 
    }
    console.log('hello')

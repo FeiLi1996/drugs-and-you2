@@ -14,7 +14,7 @@ router.post('/diseaseName',(req,res)=>{
         let page = await browser.newPage()
         
     
-        await page.goto(diseaseUrl , {waitUntil:'networkidle2'})
+        await page.goto(diseaseUrl , {waitUntil: 'load', timeout: 0})
     
         const data = await page.evaluate(()=>{
             let diseaseNameSingle
