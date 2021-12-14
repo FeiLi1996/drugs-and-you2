@@ -3,7 +3,7 @@ import React, { useContext,useState } from 'react'
 
 
 import { GlobalContext } from '../GlobalContext'
-import { DrugForm } from './forms'
+import {DynamicForm} from './forms'
 import httpClient from '../helper/httpClient'
 
 const ProfileDrug = () => {
@@ -62,7 +62,7 @@ const ProfileDrug = () => {
           
             {drugProfile}
             
-            <DrugForm handleDrugFormSubmission={handleDrugFormSubmission}/>
+            <DynamicForm handleFormSubmission={handleDrugFormSubmission} labelName = "Drug Name:" inputName="drug_name" placeholder ="Drug Name"/>
             {/* <div onClick = {()=>setDrugProfile([...drugProfile,'asp'])}>click me</div> */}
 
             {(searchResult) && !searchResult.includes("Check") && !searchResult.includes("Search") ?

@@ -41,13 +41,20 @@ const Interactions = () => {
         
         
     }
-        let displayedDescriptionAndSeverity = interactionsInfo.map(eachDrug =>{
-                for(let disease of diseaseProfile){
-                    if(disease.includes(',')){
-                        disease =disease.split(',')[0]
-                        console.log(disease)
-                    }
-                    if(eachDrug.description.includes(disease.toLowerCase()))
+    let displayedDescriptionAndSeverity = interactionsInfo.map(eachDrug =>{
+            for(let disease of diseaseProfile){
+                let tempDiseaseName = disease.toLowerCase()
+
+                if(tempDiseaseName.includes(',')){
+                    tempDiseaseName =tempDiseaseName.split(',')[0]
+                    console.log(tempDiseaseName)
+                }
+                if(tempDiseaseName.length >= 10){
+                    tempDiseaseName = tempDiseaseName.substring(0,tempDiseaseName.length-2)
+                }
+                
+                if(eachDrug.description.includes(tempDiseaseName)){
+
                     return(
 
                         <ul>
@@ -56,7 +63,29 @@ const Interactions = () => {
                         </ul>
                     )
                 }
-        })
+            }
+    })
+    // let displayedDescriptionAndSeverity      
+    // for(let disease of diseaseProfile){
+    //         if(disease.includes(',')){
+    //             disease =disease.split(',')[0]
+    //             console.log(disease)
+    //         }
+    //         displayedDescriptionAndSeverity = interactionsInfo.map(eachDrug =>{
+            
+                
+    //             if(eachDrug.description.includes(disease.toLowerCase()))
+    //                 return(
+
+    //                     <ul>
+    //                         <span>{eachDrug.drugName}</span><span>{disease}</span><span>Severity:{eachDrug.severity}</span>
+    //                         <li>Description:{eachDrug.description}</li>
+    //                     </ul>
+    //                 )
+                
+            
+    //     })
+    // }
     console.log(interactionsInfo,'test2')
     console.log(displayedDescriptionAndSeverity)
         

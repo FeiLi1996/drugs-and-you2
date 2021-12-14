@@ -2,7 +2,7 @@ import React,{useState,useContext} from 'react'
 
 
 import { GlobalContext } from '../GlobalContext'
-import { DiseaseForm } from './forms'
+import { DynamicForm } from './forms'
 import httpClient from '../helper/httpClient'
 
 const ProfileDisease = () => {
@@ -23,6 +23,7 @@ const ProfileDisease = () => {
 
     // tempCopy = JSON.parse(JSON.stringify(drugProfile));
     setDiseaseProfile([...diseaseProfile,newDisease])
+    setSearchResult([])
  
    }
    function handleDiseaseFormSubmission(event){
@@ -84,7 +85,7 @@ const ProfileDisease = () => {
                                 
                 </ul>   
             </div>
-            <DiseaseForm handleDiseaseFormSubmission ={handleDiseaseFormSubmission}/>
+            <DynamicForm handleFormSubmission ={handleDiseaseFormSubmission} labelName = "Disease Name:" inputName="disease_name" placeholder ="Disease Name"/>
             {(searchResult) && (!searchResult.includes("Check")) ?
                 (<ul className="disease_search_list">
                     {searchResult.map((disease,idx)=>
