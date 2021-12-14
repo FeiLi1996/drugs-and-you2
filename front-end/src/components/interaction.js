@@ -57,9 +57,9 @@ const Interactions = () => {
 
                     return(
 
-                        <ul>
-                            <span>{eachDrug.drugName}</span><span>{disease}</span><span>Severity:{eachDrug.severity}</span>
-                            <li>Description:{eachDrug.description}</li>
+                        <ul className='individualInteraction_wrapper'>
+                            <span className='interaction_drugName'>{eachDrug.drugName}</span><span className='interaction_diseaseName'>{disease}</span><span className='interaction_severity'>Severity:{eachDrug.severity}</span>
+                            <li className='interaction_description'>Description:{eachDrug.description}</li>
                         </ul>
                     )
                 }
@@ -92,16 +92,22 @@ const Interactions = () => {
     return(
 
 
-        <div>
+        <div className="interaction_wrapper">
+            <div className='component_name_title'>
+                <h1>Interactions</h1>
+            </div>
+            <div className='interaction_buttons'>
+                <button onClick={handleDrugDiseaseAnalysis}>Check Interactions</button>
+                <button> Clear Interactions</button>
+                <button> Reveal All Interactions</button>
+            </div>
 
-            <h1>Interactions</h1>
+
+            <div className='interactionInformations_wrapper'>
+                {displayedDescriptionAndSeverity}
+            </div>
+
             
-            <button onClick={handleDrugDiseaseAnalysis}>Check Interactions</button>
-            <button> Clear Interactions</button>
-
-
-          
-            {displayedDescriptionAndSeverity}
             <ul>
                 <span>Drug name</span><span>Disease Name</span><span>Severity</span>
                 <li>Description</li>

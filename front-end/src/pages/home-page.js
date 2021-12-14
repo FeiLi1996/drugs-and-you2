@@ -42,9 +42,10 @@ const HomePage = () => {
 
             <GlobalContext.Provider value = {{drugProfile,setDrugProfile,diseaseProfile,setDiseaseProfile}}>
                 < Introduction/>
-                <ProfileDrug />
-                <ProfileDisease />
-
+                <div className='profile_wrapper'>
+                    <ProfileDrug />
+                    <ProfileDisease />
+                </div>
                 <Interactions />
             </GlobalContext.Provider>
         </div>

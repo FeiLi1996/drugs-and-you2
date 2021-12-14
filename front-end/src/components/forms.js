@@ -48,20 +48,25 @@ import React from "react";
 export function DynamicForm (props){
 
     return(
-
-        <form onSubmit={(e)=>props.handleFormSubmission(e)} autoComplete ='off'>
-        <div>
-            <div>
-                <label>{props.labelName} </label>
-                <input
-                    type="text"
-                    name={props.inputName}
-                    placeholder={props.placeholder}
-                />
-           
-            </div>
-            <button type="submit">Submit</button>
+        <div className="form_wrapper_overall">
+            <form onSubmit={(e)=>props.handleFormSubmission(e)} autoComplete ='off'>
+                <div className="form_content_wrapper_background">
+                    <div className="form_content_wrapper"> 
+                        <div className="form_content">
+                            <label>{props.labelName} </label>
+                            <input
+                                type="text"
+                                name={props.inputName}
+                                placeholder={props.placeholder}
+                            />
+                    
+                        </div>
+                        <div className="form_content_button">
+                            <button type="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
     )
 }

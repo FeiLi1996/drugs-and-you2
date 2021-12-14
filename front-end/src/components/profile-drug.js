@@ -45,34 +45,35 @@ const ProfileDrug = () => {
     return(
 
 
-        <div>
-
-            <h1>ProfileDrug</h1>
-            <div>
+        <div className='drug_component_wrapper'>
+            <div className='component_name_title'>
+                <h1>ProfileDrug</h1>
+            </div>
+            <div className='user_drug_profile_wrapper'>
                 <ul  className="medication_list">
                     {drugProfile.map((drug,idx)=>
                     <li   className="medication" key={idx}> 
-                        {drug} <span  className="drug_modal_action" onClick = {()=>deleteDrugFromProfile(idx)}> X</span>
+                        {drug} <span   className="fake_button_action" onClick = {()=>deleteDrugFromProfile(idx)}> X</span>
                     </li>
 
                     )}
                                 
                 </ul>   
             </div>
-          
+        
             {drugProfile}
             
             <DynamicForm handleFormSubmission={handleDrugFormSubmission} labelName = "Drug Name:" inputName="drug_name" placeholder ="Drug Name"/>
             {/* <div onClick = {()=>setDrugProfile([...drugProfile,'asp'])}>click me</div> */}
 
             {(searchResult) && !searchResult.includes("Check") && !searchResult.includes("Search") ?
-                (<ul>
-                    <li>{searchResult} <span onClick = {()=>addDrugProfile(searchResult)}>+</span></li>
+                (<ul  className="drug_search">
+                    <li>{searchResult} <span  className="fake_button_action" onClick = {()=>addDrugProfile(searchResult)}>+</span></li>
                 </ul>
                 )
             :
             (
-                (<ul>
+                (<ul  className="drug_search">
                     <li>{searchResult} </li>
                 </ul>
                 )

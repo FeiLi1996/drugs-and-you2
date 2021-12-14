@@ -69,16 +69,16 @@ const ProfileDisease = () => {
     return(
 
 
-        <div>
+        <div className='disease_component_wrapper'>
+            <div className='component_name_title'>
+                <h1>ProfileDisease</h1>
+            </div>
 
-            <h1>ProfileDisease</h1>
-            <h6>Please Read</h6>
-
-            <div>
+            <div className='user_disease_profile_wrapper'>
                 <ul  className="disease_list">
                     {diseaseProfile.map((disease,idx)=>
                     <li   className="disease" key={idx}> 
-                        {disease} <span  className="drug_modal_action" onClick = {()=>deleteDiseaseFromProfile(idx)}> X</span>
+                        {disease} <span  className="fake_button_action" onClick = {()=>deleteDiseaseFromProfile(idx)}> X</span>
                     </li>
 
                     )}
@@ -90,7 +90,7 @@ const ProfileDisease = () => {
                 (<ul className="disease_search_list">
                     {searchResult.map((disease,idx)=>
                         <li   className="search_disease" key={idx}> 
-                            {disease} <span  className="drug_modal_action" onClick = {()=>addDiseaseProfile(disease)}> +</span>
+                            {disease} <span  className="fake_button_action" onClick = {()=>addDiseaseProfile(disease)}> +</span>
                         </li>
 
                     )}
@@ -98,16 +98,12 @@ const ProfileDisease = () => {
                 )
             :
             (
-                (<ul>
-                    <li>{searchResult} </li>
+                (<ul className="disease_search_list">
+                    <li  className="search_disease">{searchResult} </li>
                 </ul>
                 )
             )}
    
-                 
-                                
-        
-            
         </div>
     )
 
