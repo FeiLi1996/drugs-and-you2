@@ -64,6 +64,7 @@ const Interactions = () => {
                     )
                 }
             }
+            //return
     })
     // let displayedDescriptionAndSeverity      
     // for(let disease of diseaseProfile){
@@ -92,7 +93,7 @@ const Interactions = () => {
     return(
 
 
-        <div className="interaction_wrapper">
+        <div className="interaction_wrapper_overall">
             <div className='component_name_title'>
                 <h1>Interactions</h1>
             </div>

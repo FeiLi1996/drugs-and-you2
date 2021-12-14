@@ -1,30 +1,33 @@
 import React from 'react'
-
+import Medical from '../assets/images/medical.png'
+import StayHome from '../assets/images/stay-home.png'
 
 const Introduction = () => {
 
 
     return(
+        <div className='intro_wrapper_overall'>
 
+            <div className='intro_wrapper'>
+                <div className='app_name_wrapper'>
+                    <h1 className='app_name'>Drugs and You2</h1>
+                </div>
+                <div className='please_read_wrapper'>
+                    <h3 className='please_read'>Please Read!</h3>
+                    <ul className='list_wrapper'>
+                        <li>Doesn't store your data inputs</li>
+                        <li>Test case: ibuprofen and hypertension</li>
+                        <li></li>
+                        <li></li>
 
-        <div className='intro_wrapper'>
-            <div className='app_name_wrapper'>
-                <h1 className='app_name'>Drugs and You2</h1>
-            </div>
-            <div className='please_read_wrapper'>
-                <h6 className='please_read'>Please Read</h6>
-                <ul className='list_overall'>
-                    <li>Doesn't store your data</li>
-                    <li>Test case: ibuprofen and hypertension</li>
-                    <li></li>
-                    <li></li>
-
-                </ul>
+                    </ul>
+                </div>
             </div>
             <div className='intro_images_wrapper'>
-                <div >image1</div>
-                <div>image2</div>
+                <div ><img src={Medical} alt='Medical' /></div>
+                <div><img src={StayHome} alt='Stay Home' /></div>
             </div>
+            
         </div>
     )
 

@@ -11,7 +11,7 @@ import Introduction from '../components/intro'
 const HomePage = () => {
     const [drugProfile,setDrugProfile] = useState(['ibuprofen','aspirin','propranolol']);
     const [diseaseProfile,setDiseaseProfile] = useState(['Asthma','glaucoma','hyperlipidemia']);
-    const [drugDiseaseInteractionInfo,setDrugDiseaseInteractionInfo] = useState([]);
+   
   
     // let INITIAL_STATE={
     //     drugProfile:[],
@@ -41,12 +41,16 @@ const HomePage = () => {
         <div>
 
             <GlobalContext.Provider value = {{drugProfile,setDrugProfile,diseaseProfile,setDiseaseProfile}}>
+                
                 < Introduction/>
-                <div className='profile_wrapper'>
+               
+                <div className='profile_wrapper_overall'>
                     <ProfileDrug />
                     <ProfileDisease />
                 </div>
+                
                 <Interactions />
+               
             </GlobalContext.Provider>
         </div>
     )
