@@ -28,7 +28,7 @@ const ProfileDrug = () => {
    }
    function handleDrugFormSubmission(event){
        event.preventDefault()
-       setSearchResult('Loading.Sip a coffee.')
+       setSearchResult('Loading...Sip a coffee.')
 
        httpClient.post("http://localhost:5000/drugName", {
         "drugName":event.target.drug_name.value
@@ -66,7 +66,7 @@ const ProfileDrug = () => {
             <DynamicForm handleFormSubmission={handleDrugFormSubmission} labelName = "Drug Name:" inputName="drug_name" placeholder ="Drug Name"/>
 
 
-            {(searchResult) && !searchResult.includes("Check") && !searchResult.includes("Search") && !(searchResult ==='Loading.Sip a coffee.') ?
+            {(searchResult) && !searchResult.includes("Check") && !searchResult.includes("Search") && !(searchResult ==='Loading...Sip a coffee.') ?
                 (<ul  className="drug_search">
                     <li>{searchResult} <span  className="fake_button_action_add" onClick = {()=>addDrugProfile(searchResult)}>+</span></li>
                 </ul>

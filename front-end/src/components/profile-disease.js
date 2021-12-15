@@ -29,7 +29,7 @@ const ProfileDisease = () => {
    function handleDiseaseFormSubmission(event){
        event.preventDefault()
        console.log(event.target.disease_name.value)
-       setSearchResult('Loading.Sip a coffee.')
+       setSearchResult('Loading...Sip a coffee.')
 
        httpClient.post("http://localhost:5000/diseaseName", {
         "diseaseName":event.target.disease_name.value
@@ -87,7 +87,7 @@ const ProfileDisease = () => {
                 </ul>   
             </div>
             <DynamicForm handleFormSubmission ={handleDiseaseFormSubmission} labelName = "Disease Name:" inputName="disease_name" placeholder ="Disease Name"/>
-            {(searchResult) && (!searchResult.includes("Check") && !(searchResult ==='Loading.Sip a coffee.') ) ?
+            {(searchResult) && (!searchResult.includes("Check") && !(searchResult ==='Loading...Sip a coffee.') ) ?
                 (<ul className="disease_search_list">
                     {searchResult.map((disease,idx)=>
                         <li   className="disease_search" key={idx}> 

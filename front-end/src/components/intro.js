@@ -17,8 +17,8 @@ const Introduction = () => {
                     <ul className='list_wrapper'>
                         <li>HIPPA secured.Doesn't store your data inputs</li>
                         <li>Test case: ibuprofen and hypertension</li>
-                        <li></li>
-                        <li></li>
+                        <li>Currently only <strong>generic names</strong> work!</li>
+                        <li><strong>No Brand Names!!!</strong></li>
 
                     </ul>
                 </div>
