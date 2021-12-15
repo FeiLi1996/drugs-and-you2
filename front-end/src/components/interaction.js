@@ -1,4 +1,9 @@
 import React, { useState,useContext } from 'react'
+import { isNull } from "react-lodash"
+import _ from 'lodash';
+
+
+
 import { GlobalContext } from '../GlobalContext'
 
 import httpClient from '../helper/httpClient'
@@ -8,6 +13,8 @@ const Interactions = () => {
     const {diseaseProfile,drugProfile} = useContext(GlobalContext)
     let [toggleDescriptionDisplay,setToggleDescriptionDisplay] = useState('noShow')
     let [toggleDescriptionDisplayBoolean,setToggleDescriptionDisplayBoolean] = useState(false)
+
+
     let [interactionsInfo,setInteractionsInfo] =useState([
 
         // {   
@@ -25,7 +32,7 @@ const Interactions = () => {
    
     ]);
     let [loadingMessage,setLoadingMessage] =useState('')
-    let displayedDescriptionAndSeverity =[]
+   
     async function handleDrugDiseaseAnalysis (){
 
         if(Array.isArray(drugProfile) && drugProfile.length && Array.isArray(diseaseProfile) && diseaseProfile.length){
@@ -46,6 +53,8 @@ const Interactions = () => {
                 setInteractionsInfo(interactionsInfo=>[...interactionsInfo,...result.data]),
                 setLoadingMessage('')
             )
+            test()
+            
 
 
         }
@@ -54,48 +63,59 @@ const Interactions = () => {
             
         }
         console.log('does thise even triggered?')
+    
         
          
         
     }    
     
+    function test(){
+        let displayedDescriptionAndSeverity =[]
+        interactionsInfo.map((eachDrug,idx) =>{
+            let eachDrugDescription = eachDrug.description.toLowerCase()
+            
+            for(let idx2 in diseaseProfile){
+                let tempDiseaseName = diseaseProfile[idx2].toLowerCase()
+
+                if(tempDiseaseName.includes(',')){
+                    tempDiseaseName =tempDiseaseName.split(',')[0]
+                    //console.log(tempDiseaseName)
+                }
+                if(tempDiseaseName.length >= 10){
+                    tempDiseaseName = tempDiseaseName.substring(0,tempDiseaseName.length-2)
+                }
+
+                if(eachDrugDescription.includes("'s")){
+                    eachDrugDescription= eachDrugDescription.replace(/'s/g, '')
+                    //console.log(eachDrugDescription)
+                }
+                
+                if(eachDrugDescription.includes(tempDiseaseName)){
+                    console.log(idx+1,'1 loop',parseInt(idx2)+1,'2 loop')
+                    displayedDescriptionAndSeverity.push(
+
+                        <ul key ={idx +1 * parseInt(idx2)+1} className='individualInteraction_wrapper'>
+                            <div className='description_header' >
+                                <span id='interaction_drugName'>{eachDrug.drugName}</span><span id='preposition'>With</span><span id='interaction_diseaseName'>{diseaseProfile[idx2]}</span><span id='interaction_severity'>Severity:<span id='severity_category'>{eachDrug.severity}</span></span>
+                            </div>
+                            <li className={`interaction_description ${toggleDescriptionDisplay}`}>Description:{eachDrug.description}</li>
+                        </ul>
+                    )
+                }
+            
+                
+            }
+
+            
+            return null
+        }) 
+
+    
+        return displayedDescriptionAndSeverity
    
-    interactionsInfo.map((eachDrug,idx) =>{
-        let eachDrugDescription = eachDrug.description.toLowerCase()
-        
-        for(let idx2 in diseaseProfile){
-            let tempDiseaseName = diseaseProfile[idx2].toLowerCase()
+    }
 
-            if(tempDiseaseName.includes(',')){
-                tempDiseaseName =tempDiseaseName.split(',')[0]
-                //console.log(tempDiseaseName)
-            }
-            if(tempDiseaseName.length >= 10){
-                tempDiseaseName = tempDiseaseName.substring(0,tempDiseaseName.length-2)
-            }
- 
-            if(eachDrugDescription.includes("'s")){
-                eachDrugDescription= eachDrugDescription.replace(/'s/g, '')
-                //console.log(eachDrugDescription)
-            }
-            
-            if(eachDrugDescription.includes(tempDiseaseName)){
-                console.log(idx+1,'1 loop',parseInt(idx2)+1,'2 loop')
-                displayedDescriptionAndSeverity.push(
-
-                    <ul key ={idx +1 * parseInt(idx2)+1} className='individualInteraction_wrapper'>
-                        <div className='description_header' >
-                            <span id='interaction_drugName'>{eachDrug.drugName}</span><span id='preposition'>With</span><span id='interaction_diseaseName'>{diseaseProfile[idx2]}</span><span id='interaction_severity'>Severity:<span id='severity_category'>{eachDrug.severity}</span></span>
-                        </div>
-                        <li className={`interaction_description ${toggleDescriptionDisplay}`}>Description:{eachDrug.description}</li>
-                    </ul>
-                )
-            }
-            
-        }
-
-        return null
-    })
+    
 
 
 
@@ -197,7 +217,7 @@ const Interactions = () => {
     //     })
     // }
     console.log(interactionsInfo,'test2')
-    console.log(displayedDescriptionAndSeverity,'if noz empty result...')
+    //console.log(displayedDescriptionAndSeverity,'if noz empty result...')
         
 
     function toggleDescription() {
@@ -229,7 +249,8 @@ const Interactions = () => {
             </div>
 
             <div className='interactionInformations_wrapper'>
-                {displayedDescriptionAndSeverity}
+                {/* {displayedDescriptionAndSeverity} */}
+                {test()}
             </div>
 
             
