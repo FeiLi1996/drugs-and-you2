@@ -29,6 +29,7 @@ const ProfileDisease = () => {
    function handleDiseaseFormSubmission(event){
        event.preventDefault()
        console.log(event.target.disease_name.value)
+       setSearchResult('Loading.Sip a coffee.')
 
        httpClient.post("http://localhost:5000/diseaseName", {
         "diseaseName":event.target.disease_name.value
@@ -78,7 +79,7 @@ const ProfileDisease = () => {
                 <ul  className="disease_list">
                     {diseaseProfile.map((disease,idx)=>
                     <li   className="disease" key={idx}> 
-                        {disease} <span  className="fake_button_action" onClick = {()=>deleteDiseaseFromProfile(idx)}> X</span>
+                        {disease} <span  className="fake_button_action_delete" onClick = {()=>deleteDiseaseFromProfile(idx)}> X</span>
                     </li>
 
                     )}
@@ -86,11 +87,11 @@ const ProfileDisease = () => {
                 </ul>   
             </div>
             <DynamicForm handleFormSubmission ={handleDiseaseFormSubmission} labelName = "Disease Name:" inputName="disease_name" placeholder ="Disease Name"/>
-            {(searchResult) && (!searchResult.includes("Check")) ?
+            {(searchResult) && (!searchResult.includes("Check") && !(searchResult ==='Loading.Sip a coffee.') ) ?
                 (<ul className="disease_search_list">
                     {searchResult.map((disease,idx)=>
-                        <li   className="search_disease" key={idx}> 
-                            {disease} <span  className="fake_button_action" onClick = {()=>addDiseaseProfile(disease)}> +</span>
+                        <li   className="disease_search" key={idx}> 
+                            {disease} <span  className="fake_button_action_add" onClick = {()=>addDiseaseProfile(disease)}> +</span>
                         </li>
 
                     )}

@@ -15,7 +15,7 @@ const Introduction = () => {
                 <div className='please_read_wrapper'>
                     <h3 className='please_read'>Please Read!</h3>
                     <ul className='list_wrapper'>
-                        <li>Doesn't store your data inputs</li>
+                        <li>HIPPA secured.Doesn't store your data inputs</li>
                         <li>Test case: ibuprofen and hypertension</li>
                         <li></li>
                         <li></li>

@@ -57,7 +57,7 @@ export function DynamicForm (props){
                             <input
                                 type="text"
                                 name={props.inputName}
-                                placeholder={props.placeholder}
+                                placeholder={`Input ${props.placeholder}`}
                             />
                     
                         </div>

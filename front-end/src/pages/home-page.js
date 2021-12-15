@@ -9,8 +9,8 @@ import Introduction from '../components/intro'
 
 
 const HomePage = () => {
-    const [drugProfile,setDrugProfile] = useState(['ibuprofen','aspirin','propranolol']);
-    const [diseaseProfile,setDiseaseProfile] = useState(['Asthma','glaucoma','hyperlipidemia']);
+    const [drugProfile,setDrugProfile] = useState(['Ibuprofen','Aspirin','Propranolol']);
+    const [diseaseProfile,setDiseaseProfile] = useState(['Asthma','Glaucoma','Hyperlipidemia']);
    
   
     // let INITIAL_STATE={

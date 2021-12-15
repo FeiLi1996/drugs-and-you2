@@ -28,14 +28,15 @@ const ProfileDrug = () => {
    }
    function handleDrugFormSubmission(event){
        event.preventDefault()
-
+       setSearchResult('Loading.Sip a coffee.')
 
        httpClient.post("http://localhost:5000/drugName", {
         "drugName":event.target.drug_name.value
         }).then(response=>{
 
             //console.log(response.data.drugName)
-        setSearchResult(response.data.drugName)   
+        setSearchResult(response.data.drugName)
+          
         }).catch(error=>{
             console.log(error)
         })
@@ -53,22 +54,21 @@ const ProfileDrug = () => {
                 <ul  className="medication_list">
                     {drugProfile.map((drug,idx)=>
                     <li   className="medication" key={idx}> 
-                        {drug} <span   className="fake_button_action" onClick = {()=>deleteDrugFromProfile(idx)}> X</span>
+                        {drug} <span   className="fake_button_action_delete" onClick = {()=>deleteDrugFromProfile(idx)}> X</span>
                     </li>
 
                     )}
                                 
                 </ul>   
             </div>
-        
-            {drugProfile}
+     
             
             <DynamicForm handleFormSubmission={handleDrugFormSubmission} labelName = "Drug Name:" inputName="drug_name" placeholder ="Drug Name"/>
-            {/* <div onClick = {()=>setDrugProfile([...drugProfile,'asp'])}>click me</div> */}
 
-            {(searchResult) && !searchResult.includes("Check") && !searchResult.includes("Search") ?
+
+            {(searchResult) && !searchResult.includes("Check") && !searchResult.includes("Search") && !(searchResult ==='Loading.Sip a coffee.') ?
                 (<ul  className="drug_search">
-                    <li>{searchResult} <span  className="fake_button_action" onClick = {()=>addDrugProfile(searchResult)}>+</span></li>
+                    <li>{searchResult} <span  className="fake_button_action_add" onClick = {()=>addDrugProfile(searchResult)}>+</span></li>
                 </ul>
                 )
             :
