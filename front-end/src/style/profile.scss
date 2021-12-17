@@ -43,3 +43,15 @@
 .drug_search,.disease_search{
     list-style-type: circle;
 }
+
+
+
+@media screen and (max-width: 700px){
+    .profile_wrapper_overall{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        
+
+    }
+}

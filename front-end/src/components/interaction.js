@@ -1,6 +1,5 @@
 import React, { useState,useContext } from 'react'
-import { isNull } from "react-lodash"
-import _ from 'lodash';
+
 
 
 
@@ -53,7 +52,7 @@ const Interactions = () => {
                 setInteractionsInfo(interactionsInfo=>[...interactionsInfo,...result.data]),
                 setLoadingMessage('')
             )
-            test()
+            generatingDescriptionAndSeverityComponents()
             
 
 
@@ -62,14 +61,14 @@ const Interactions = () => {
             setLoadingMessage('At least 1 drug and disease profile must be filled')
             
         }
-        console.log('does thise even triggered?')
+       
     
         
          
         
     }    
     
-    function test(){
+    function generatingDescriptionAndSeverityComponents(){
         let displayedDescriptionAndSeverity =[]
         interactionsInfo.map((eachDrug,idx) =>{
             let eachDrugDescription = eachDrug.description.toLowerCase()
@@ -91,7 +90,7 @@ const Interactions = () => {
                 }
                 
                 if(eachDrugDescription.includes(tempDiseaseName)){
-                    console.log(idx+1,'1 loop',parseInt(idx2)+1,'2 loop')
+         
                     displayedDescriptionAndSeverity.push(
 
                         <ul key ={idx +1 * parseInt(idx2)+1} className='individualInteraction_wrapper'>
@@ -110,56 +109,13 @@ const Interactions = () => {
             return null
         }) 
 
-    
+        console.log(interactionsInfo)
+        console.log(displayedDescriptionAndSeverity)
         return displayedDescriptionAndSeverity
    
     }
 
-    
 
-
-
-
-
-
-
-
-    // let displayedDescriptionAndSeverity = interactionsInfo.map((eachDrug,idx) =>{
-    //         let eachDrugDescription = eachDrug.description.toLowerCase()
-            
-    //         for(let disease of diseaseProfile){
-    //             let tempDiseaseName = disease.toLowerCase()
-
-    //             if(tempDiseaseName.includes(',')){
-    //                 tempDiseaseName =tempDiseaseName.split(',')[0]
-    //                 //console.log(tempDiseaseName)
-    //             }
-    //             if(tempDiseaseName.length >= 10){
-    //                 tempDiseaseName = tempDiseaseName.substring(0,tempDiseaseName.length-2)
-    //             }
-     
-    //             if(eachDrugDescription.includes("'s")){
-    //                 eachDrugDescription= eachDrugDescription.replace(/'s/g, '')
-    //                 //console.log(eachDrugDescription)
-    //             }
-                
-    //             if(eachDrugDescription.includes(tempDiseaseName)){
-
-    //                 return(
-
-    //                     <ul key ={idx} className='individualInteraction_wrapper'>
-    //                         <div className='description_header' >
-    //                             <span id='interaction_drugName'>{eachDrug.drugName}</span><span id='preposition'>With</span><span id='interaction_diseaseName'>{disease}</span><span id='interaction_severity'>Severity:<span id='severity_category'>{eachDrug.severity}</span></span>
-    //                         </div>
-    //                         <li className={`interaction_description ${toggleDescriptionDisplay}`}>Description:{eachDrug.description}</li>
-    //                     </ul>
-    //                 )
-    //             }
-                
-    //         }
-
-    //     return null
-    // })
 
     // arr1=[3,3,4,5,6]
 // arr2=[4,6,4,7,8]
@@ -193,31 +149,6 @@ const Interactions = () => {
 
 
 
-
-    // let displayedDescriptionAndSeverity      
-    // for(let disease of diseaseProfile){
-    //         if(disease.includes(',')){
-    //             disease =disease.split(',')[0]
-    //             console.log(disease)
-    //         }
-    //         displayedDescriptionAndSeverity = interactionsInfo.map(eachDrug =>{
-                
-    //             console.log(eachDrug.description.includes(disease.toLowerCase()),'pre if statement')
-    //             if(eachDrug.description.includes(disease.toLowerCase()))
-                    
-    //                 return(
-
-    //                     <ul>
-    //                         <span>{eachDrug.drugName}</span><span>{disease}</span><span>Severity:{eachDrug.severity}</span>
-    //                         <li>Description:{eachDrug.description}</li>
-    //                     </ul>
-    //                 )
-                
-            
-    //     })
-    // }
-    console.log(interactionsInfo,'test2')
-    //console.log(displayedDescriptionAndSeverity,'if noz empty result...')
         
 
     function toggleDescription() {
@@ -231,6 +162,8 @@ const Interactions = () => {
         }
 
     } 
+
+    
 
     return(
 
@@ -250,7 +183,7 @@ const Interactions = () => {
 
             <div className='interactionInformations_wrapper'>
                 {/* {displayedDescriptionAndSeverity} */}
-                {test()}
+                {generatingDescriptionAndSeverityComponents()}
             </div>
 
             

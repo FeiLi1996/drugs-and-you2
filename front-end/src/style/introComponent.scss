@@ -48,3 +48,13 @@
 
     }
 }
+
+@media screen and (max-width: 700px){
+    .intro_images_wrapper{
+        display: flex;
+        flex-direction: column;
+  
+        text-align: center;
+   
+    }
+}
