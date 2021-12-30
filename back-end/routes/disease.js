@@ -4,8 +4,6 @@ const puppeteer = require('puppeteer');
 
 
 router.post('/diseaseName',(req,res)=>{
-    console.log(req.body)
-    
 
     const gettingDiseaseName = async (name) =>{
         let diseaseUrl = `https://www.ncbi.nlm.nih.gov/mesh/?term=${name}`
@@ -41,9 +39,7 @@ router.post('/diseaseName',(req,res)=>{
                 //typeerror of undefined
                 diseaseNameMultipleArrayList = "Check your spelling"
             }
-            
-           
-            //diseaseNameMultiple.splice(5,1)
+
             return{
                 diseaseNameSingle,
                 diseaseNameMultipleArrayList
@@ -55,9 +51,9 @@ router.post('/diseaseName',(req,res)=>{
         }
     }
     const diseaseNameData =   gettingDiseaseName (req.body.diseaseName)
-    //console.log(diseaseNameData)
+
     diseaseNameData.then(result =>
-        //console.log(result.data)
+
         res.json(result.data)
 
     )

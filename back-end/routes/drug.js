@@ -2,12 +2,8 @@ const express = require('express')
 const router = express.Router();
 const puppeteer = require('puppeteer');
 
-
-
-
     router.post('/drugName',(req,res)=>{
-        console.log(req.body)
-        
+
 
         const gettingDrugName = async (name) =>{
             let drugUrl = `https://www.drugs.com/search.php?searchterm=${name}`

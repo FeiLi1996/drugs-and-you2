@@ -10,8 +10,7 @@ const ProfileDrug = () => {
     const {drugProfile,setDrugProfile} = useContext(GlobalContext)
     const [searchResult,setSearchResult] = useState('Search a drug')
 
-    //const {diseaseProfile,setDiseaseProfile} = useContext(GlobalContext)
-   //api calls
+
    function deleteDrugFromProfile(idx){
         let tempCopy
         tempCopy = JSON.parse(JSON.stringify(drugProfile));
@@ -20,9 +19,6 @@ const ProfileDrug = () => {
    }
    function addDrugProfile (newDrug){
 
-    // let tempCopy;
-
-    // tempCopy = JSON.parse(JSON.stringify(drugProfile));
     setDrugProfile([...drugProfile,newDrug])
     setSearchResult('Search a drug')
    }
@@ -34,7 +30,6 @@ const ProfileDrug = () => {
         "drugName":event.target.drug_name.value
         }).then(response=>{
 
-            //console.log(response.data.drugName)
         setSearchResult(response.data.drugName)
           
         }).catch(error=>{

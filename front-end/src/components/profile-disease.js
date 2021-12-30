@@ -9,8 +9,7 @@ const ProfileDisease = () => {
     const {diseaseProfile,setDiseaseProfile} = useContext(GlobalContext)
     const [searchResult,setSearchResult] = useState([])
 
-    
-   //api calls
+
    function deleteDiseaseFromProfile(idx){
         let tempCopy
         tempCopy = JSON.parse(JSON.stringify(diseaseProfile));
@@ -19,16 +18,12 @@ const ProfileDisease = () => {
    }
    function addDiseaseProfile (newDisease){
 
-    // let tempCopy;
-
-    // tempCopy = JSON.parse(JSON.stringify(drugProfile));
     setDiseaseProfile([...diseaseProfile,newDisease])
     setSearchResult([])
  
    }
    function handleDiseaseFormSubmission(event){
        event.preventDefault()
-       console.log(event.target.disease_name.value)
        setSearchResult('Loading...Sip a coffee.')
 
        httpClient.post("http://localhost:5000/diseaseName", {
@@ -41,9 +36,7 @@ const ProfileDisease = () => {
             
             let diseaseNameSingleCondition=diseaseNameSingle.includes('Check')
             let diseaseNameMultipleArrayListCondition=diseaseNameMultipleArrayList.includes('Check')
-            console.log(diseaseNameSingleCondition,'single')
-            console.log(diseaseNameMultipleArrayListCondition,'multiple')
-            console.log(response.data)
+
             if( !diseaseNameSingleCondition  && diseaseNameMultipleArrayListCondition){
                 setSearchResult ([diseaseNameSingle])
             }
@@ -56,17 +49,14 @@ const ProfileDisease = () => {
                 }
 
             }
-            
-
-        //setSearchResult(response.data.drugName)   
+ 
         }).catch(error=>{
             console.log(error)
         })
-       //setSearchResult([event.target.disease_name.value])   
+
       
    }
 
-   console.log('hello')
     return(
 
 

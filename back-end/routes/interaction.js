@@ -3,10 +3,8 @@ const router = express.Router();
 const puppeteer = require('puppeteer');
 
 
-
-
     router.post('/interaction',(req,res)=>{
-        console.log(req.body)
+
         let overallInteractionDescription =[];
 
         const gettingInteractionDescription = async (name) =>{
@@ -27,28 +25,6 @@ const puppeteer = require('puppeteer');
           
                 let interactionDescriptionArrayList
                 let interactionSeverityArrayList
-                
-                
-                // try{
-                //     interactionDescriptionNodeList = [...document.querySelectorAll('.interactions-reference')]
-                //     interactionDescriptionArrayList = interactionDescriptionNodeList.map(oneInteraction =>
-                //         oneInteraction.getElementsByTagName('p')[1].innerHTML
-                //     )
-                //     interactionDescriptionSeverityArrayList = interactionDescriptionNodeList.map(oneInteraction =>
-                //         oneInteraction.getElementsByTagName('p')[0].innerHTML
-                //     )
-
-
-                //     drugAndDiseasesNodeList1 = document.querySelector("ul.interactions")
-                //     drugAndDiseasesNodeList2 = [...drugAndDiseasesNodeList1.querySelectorAll('li')]
-                //     drugAndDiseasesArrayList = drugAndDiseasesNodeList2.map(oneInteraction =>
-                //         oneInteraction.innerText
-                //     )
-                // }
-                
-                // catch(err){
-                //     overallInteractionDescription = "Something went wrong. Try again"
-                // }
 
                 try {
                     drugAndDiseasesArrayList = [...document.querySelectorAll('.interactions-reference')]
@@ -58,21 +34,12 @@ const puppeteer = require('puppeteer');
                     interactionDescriptionArrayList = drugAndDiseasesArrayList.map(eachInteraction =>
                         eachInteraction.getElementsByTagName('p')[1].innerText   
                     )
-                        
-                    
-                                //oneInteraction.querySelector('div').querySelector('span').innerText
-                                
 
                             
                 } catch (error) {
-                    //overallInteractionDescription = "An error has occurred please try again"
+                    console.log(error)
                 }
-                
-    
-                
-                
 
-             
                 return{
                     interactionSeverityArrayList,
                     interactionDescriptionArrayList
@@ -80,20 +47,15 @@ const puppeteer = require('puppeteer');
                 }
             })
             await browser.close()
-            
-            
-           
-
-
 
             return   {
                 data
             }
         }
         const interactionDescriptionData =   gettingInteractionDescription (req.body.drugName)
-        //console.log(drugNameTest)
+
         interactionDescriptionData.then(result =>{
-            //console.log(result.data)
+
             for(let i =0;i<result.data.interactionSeverityArrayList.length;i++ ){
                     overallInteractionDescription.push({
                         'drugName': req.body.drugName,
@@ -102,8 +64,6 @@ const puppeteer = require('puppeteer');
                     })
                 }
 
-            //res.json(result.data)
-      
             res.json(overallInteractionDescription)
         })
         
