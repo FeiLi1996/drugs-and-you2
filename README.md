@@ -1,26 +1,23 @@
 # Drugs-and-You2
 
-This is a for fun web app that allows people to buy and sell drugs.
+This is a  web app that allows users to check if there are any drug to disease interactions. Also, it lists the interactions' description, severity, and with which drug.
 
-People can also check if there are any drug to drug interactions among the medications they take.
-
-
+Do note that this app is kind of slow. I created a version2.1 ,which is significantly faster than this version.
 
 # Demonstration Video below:
-https://youtu.be/VRPQPDR6xOA
+https://youtu.be/_iYCT5uHlX0
 
 
 
  # Setup
-1. CD into server
-2. you can start an virtual environment to not pollute your local dependencies.(optional)
-3. pip install the requirements.txt "pip install -r requirements.txt"
-4. python app.py[window] or python3 app.py[mac]
-5. start another terminal
-6. CD into client
-7. Install the packages 'npm install '
-8. 'npm start' 
-9. Then go to http://localhost:3000/
+1. CD into back-end
+2. 'npm install' to install the packages
+3. 'npm start' to start the server
+4. start another terminal
+5. CD into front-end
+6. 'npm install' to install the packages
+7. 'npm start' to start the front-end
+8. Then go to http://localhost:3000/
 
 
 > Remeber to take your medications ***responsibly***
